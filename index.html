@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Working with JSON</title>
+    <!-- for using axios with vanilla javascript -->
+    <script src="./node_modules/axios/dist/axios.min.js"></script>
+    <script src="./index.js" type="module" defer></script>
+    <!-- <script src="./index.js" defer></script> -->
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <h1>Fetch Json</h1>
+    <ul title="Issue List">
+      <li>
+        CORS Issue fetching from 127.0.0.1; Not an issue in Postman
+        <ul>
+          <li>Resolved by creating a cors-proxy server while in development</li>
+          <li>
+            For QA and PROD, CORS needs to addressed (allowed) on the server
+          </li>
+        </ul>
+      </li>
+      <li>Not all schema generators are created equal</li>
+      <ul>
+        <li>
+          Used this
+          <a href="https://www.jsonschema.net/home" target="_blank"
+            >JSON Schema Generator</a
+          >
+        </li>
+      </ul>
+    </ul>
+    <div class="container">
+      <div class="error"></div>
+    </div>
+
+    <div class="container">
+      <textarea class="item json" title="json">Json</textarea>
+      <textarea class="item schema" title="schema">Schema</textarea>
+    </div>
+    <div class="container">
+      <textarea class="item ariesJson" title="ariesJson">Aries Json</textarea>
+    </div>
+    <div class="dynamic-ui"></div>
+  </body>
+</html>

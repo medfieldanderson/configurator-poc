@@ -1,0 +1,996 @@
+{
+  "name": "Authorization Submission",
+  "label": "Medical Authorization",
+  "resource_path": "All/PlanServices/Aries/Referrals & Authorizations/AuthorizationSubmission",
+  "feature_xri": "xri://@navinet.net/trading-partner/aries/authorizations/submission",
+  "state_xri": "xri://@navinet.net/open/authorizations/ui/(+state*authorization-submission*plan!aries)",
+  "disclaimers": {
+    "details": "Submission of this form is not guarantee of payment and subject to member eligibility. Authorizations not valid for non-covered services or services provided by a non-participating provider.",
+    "provider": "For capitated Laboratory, Physical Therapy, or Radiology this member must be referred to the PCP's capitated provider. This information is available through the Eligibility & Benefits Inquiry transaction.",
+    "auth_not_required": "new disclaimer for auth not required"
+  },
+  "amend_enabled": true,
+  "amend_non_navinet_authorizations_enabled": true,
+  "amend_unavailable_error_message": "Only Authorizations submitted through NaviNet can be amended.",
+  "servicing_provider_search_popup": { "hide_npi": false },
+  "bypass_amend_on_continue": false,
+  "admission_date_readonly": false,
+  "eligibility_check": {
+    "allow_continue_when_ineligible": true,
+    "predetermination_eligibility_check_enabled": false
+  },
+  "bed_type_definitions": {
+    "CC": "Cardiac Care",
+    "DB": "Detained Baby (Well Nursery)",
+    "HO": "Hospice",
+    "ICU": "ICU",
+    "II": "Intermediate ICU",
+    "IN": "Intensive Care Nursery",
+    "K": "Skilled Nursing",
+    "M": "Medical",
+    "OC": "Obstetric Cesarean",
+    "OV": "Obstetric Vaginal",
+    "RA": "Rehab dayAcute",
+    "REH": "Rehab",
+    "RH": "Physical Rehab",
+    "RS": "Rehab day Subacute",
+    "S": "Surgical",
+    "SU": "Subacute"
+  },
+  "amend": {
+    "allow_add_amend": ["Approved", "PartiallyApproved", "Modified"],
+    "allow_add": ["Pending", "Complete"],
+    "statuses": {
+      "Approved": {
+        "service_lines": {
+          "amend_dates": true,
+          "add": true,
+          "amend_units": false
+        },
+        "diagnoses_codes": { "add": true, "delete": false }
+      },
+      "PartiallyApproved": {
+        "service_lines": {
+          "amend_dates": true,
+          "add": true,
+          "amend_units": false
+        }
+      },
+      "Modified": {
+        "service_lines": {
+          "amend_dates": true,
+          "add": true,
+          "amend_units": true
+        }
+      },
+      "Pending": { "service_lines": { "add": true } },
+      "Complete": { "service_lines": { "add": true } }
+    }
+  },
+  "level_of_service_enabled": false,
+  "newborn_form": {
+    "user_notice": "Please enter the baby's name, gender and date of birth."
+  },
+  "places_of_service": [
+    { "code": "01", "authorization_type": "outpatient" },
+    { "code": "03", "authorization_type": "outpatient" },
+    { "code": "04", "authorization_type": "inpatient" },
+    { "code": "05", "authorization_type": "inpatient" },
+    { "code": "06", "authorization_type": "outpatient" },
+    { "code": "07", "authorization_type": "inpatient" },
+    { "code": "08", "authorization_type": "inpatient" },
+    { "code": "09", "authorization_type": "outpatient" },
+    { "code": "11", "authorization_type": "outpatient" },
+    { "code": "12", "authorization_type": "inpatient" },
+    { "code": "13", "authorization_type": "inpatient" },
+    { "code": "14", "authorization_type": "outpatient" },
+    { "code": "15", "authorization_type": "inpatient" },
+    { "code": "20", "authorization_type": "outpatient" },
+    { "code": "21", "authorization_type": "inpatient" },
+    { "code": "22", "authorization_type": "inpatient" },
+    { "code": "71", "authorization_type": "inpatient" },
+    { "code": "72", "authorization_type": "outpatient" },
+    { "code": "81", "authorization_type": "inpatient" },
+    { "code": "99", "authorization_type": "outpatient" },
+    { "code": "100", "authorization_type": "inpatient" },
+    { "code": "101", "authorization_type": "outpatient" },
+    { "code": "102", "authorization_type": "inpatient" },
+    { "code": "103", "authorization_type": "inpatient" }
+  ],
+  "service_types": [
+    {
+      "code": "1",
+      "configuration_override": true,
+      "level_of_service_enabled": true,
+      "amend": {
+        "allow_add_amend": ["Approved"],
+        "allow_add": ["Pending", "Complete"],
+        "allow_amend": ["Modified"],
+        "statuses": {
+          "Approved": {
+            "service_lines": {
+              "amend_dates": false,
+              "add": true,
+              "amend_units": true
+            },
+            "diagnoses_codes": { "add": false, "delete": false }
+          },
+          "PartiallyApproved": {
+            "service_lines": {
+              "amend_dates": true,
+              "add": true,
+              "amend_units": true
+            }
+          },
+          "Modified": {
+            "service_lines": {
+              "amend_dates": true,
+              "add": true,
+              "amend_units": true
+            }
+          },
+          "Pending": { "service_lines": { "add": true } },
+          "Complete": { "service_lines": { "add": true } }
+        }
+      },
+      "places_of_service": [
+        { "code": "01" },
+        { "code": "03" },
+        { "code": "04" },
+        { "code": "05" },
+        { "code": "06" },
+        { "code": "07" }
+      ]
+    },
+    {
+      "code": "02",
+      "places_of_service": [
+        { "code": "01" },
+        { "code": "03" },
+        { "code": "04" },
+        { "code": "101" },
+        { "code": "102" },
+        { "code": "103" }
+      ]
+    },
+    {
+      "code": "03",
+      "places_of_service": [
+        { "code": "08" },
+        { "code": "09" },
+        { "code": "10" },
+        { "code": "11" },
+        { "code": "100" },
+        { "code": "101" },
+        { "code": "102" },
+        { "code": "103" }
+      ]
+    },
+    {
+      "code": "04",
+      "places_of_service": [
+        { "code": "01" },
+        { "code": "06" },
+        { "code": "08" },
+        { "code": "09" },
+        { "code": "10" },
+        { "code": "101" },
+        { "code": "102" },
+        { "code": "103" }
+      ]
+    },
+    {
+      "code": "05",
+      "places_of_service": [
+        { "code": "01" },
+        { "code": "03" },
+        { "code": "04" },
+        { "code": "05" },
+        { "code": "101" },
+        { "code": "102" },
+        { "code": "103" }
+      ]
+    },
+    { "code": "06", "places_of_service": [{ "code": "102" }] },
+    {
+      "code": "07",
+      "places_of_service": [
+        { "code": "01" },
+        { "code": "101" },
+        { "code": "102" },
+        { "code": "103" }
+      ]
+    },
+    {
+      "code": "08",
+      "places_of_service": [{ "code": "01" }, { "code": "103" }]
+    },
+    {
+      "code": "11",
+      "places_of_service": [
+        { "code": "05" },
+        { "code": "06" },
+        { "code": "07" },
+        { "code": "08" },
+        { "code": "09" },
+        { "code": "10" },
+        { "code": "11" },
+        { "code": "100" }
+      ]
+    },
+    {
+      "code": "12",
+      "configuration_override": true,
+      "places_of_service": [
+        { "code": "01" },
+        { "code": "04" },
+        { "code": "06" },
+        { "code": "08" },
+        { "code": "10" },
+        { "code": "100" },
+        { "code": "102" }
+      ]
+    },
+    { "code": "13", "places_of_service": [{ "code": "103" }] },
+    {
+      "code": "14",
+      "places_of_service": [
+        { "code": "05" },
+        { "code": "06" },
+        { "code": "07" },
+        { "code": "09" },
+        { "code": "10" },
+        { "code": "11" },
+        { "code": "100" },
+        { "code": "101" }
+      ]
+    },
+    {
+      "code": "15",
+      "places_of_service": [
+        { "code": "01" },
+        { "code": "07" },
+        { "code": "08" },
+        { "code": "10" },
+        { "code": "11" },
+        { "code": "100" }
+      ]
+    },
+    {
+      "code": "20",
+      "configuration_override": true,
+      "places_of_service": [
+        { "code": "07" },
+        { "code": "08" },
+        { "code": "09" },
+        { "code": "10" },
+        { "code": "11" },
+        { "code": "100" },
+        { "code": "101" }
+      ]
+    },
+    {
+      "code": "21",
+      "places_of_service": [
+        { "code": "01" },
+        { "code": "03" },
+        { "code": "101" },
+        { "code": "102" },
+        { "code": "103" }
+      ]
+    },
+    {
+      "code": "22",
+      "places_of_service": [
+        { "code": "101" },
+        { "code": "102" },
+        { "code": "103" }
+      ]
+    },
+    {
+      "code": "23",
+      "places_of_service": [{ "code": "01" }, { "code": "103" }]
+    },
+    {
+      "code": "24",
+      "places_of_service": [
+        { "code": "01" },
+        { "code": "101" },
+        { "code": "102" },
+        { "code": "103" }
+      ]
+    },
+    { "code": "25", "places_of_service": [{ "code": "100" }] },
+    { "code": "26", "places_of_service": [{ "code": "101" }] },
+    { "code": "31", "places_of_service": [{ "code": "102" }] },
+    {
+      "code": "32",
+      "places_of_service": [
+        { "code": "01" },
+        { "code": "03" },
+        { "code": "04" },
+        { "code": "05" }
+      ]
+    },
+    {
+      "code": "33",
+      "places_of_service": [
+        { "code": "01" },
+        { "code": "03" },
+        { "code": "04" },
+        { "code": "103" }
+      ]
+    },
+    { "code": "34", "places_of_service": [{ "code": "02" }] },
+    { "code": "41", "places_of_service": [{ "code": "101" }] },
+    {
+      "code": "65",
+      "configuration_override": false,
+      "newborn_service": true,
+      "level_of_service_enabled": true,
+      "places_of_service": [{ "code": "11" }, { "code": "12" }]
+    },
+    {
+      "code": "71",
+      "places_of_service": [
+        { "code": "101" },
+        { "code": "102" },
+        { "code": "103" }
+      ]
+    },
+    { "code": "99", "places_of_service": [{ "code": "103" }] },
+    {
+      "code": "BL",
+      "configuration_override": true,
+      "places_of_service": [
+        { "code": "11" },
+        { "code": "12" },
+        { "code": "04" },
+        { "code": "101" },
+        { "code": "102" },
+        { "code": "103" }
+      ],
+      "providers": {
+        "requesting": {
+          "label": "Requesting Provider",
+          "is_manual_data_entry_allowed": true
+        },
+        "servicing": {
+          "label": "Servicing Provider",
+          "is_manual_data_entry_allowed": true
+        }
+      }
+    },
+    {
+      "code": "78",
+      "newborn_service": true,
+      "configuration_override": true,
+      "level_of_service_enabled": true,
+      "amend": {
+        "allow_add_amend": ["Approved"],
+        "allow_add": ["Pending", "Complete"],
+        "allow_amend": ["Modified"],
+        "statuses": {
+          "Approved": {
+            "service_lines": {
+              "amend_dates": true,
+              "add": true,
+              "amend_units": true
+            },
+            "diagnoses_codes": { "add": true, "delete": true }
+          },
+          "PartiallyApproved": {
+            "service_lines": {
+              "amend_dates": true,
+              "add": true,
+              "amend_units": false
+            }
+          },
+          "Modified": {
+            "service_lines": {
+              "amend_dates": false,
+              "add": true,
+              "amend_units": false
+            }
+          },
+          "RequiredWithSupplementalInformation": {
+            "service_lines": { "amend_dates": true, "add": true },
+            "diagnoses_codes": { "add": true, "delete": false }
+          },
+          "Complete": { "service_lines": { "add": true } }
+        }
+      },
+      "places_of_service": [{ "code": "11" }, { "code": "12" }],
+      "providers": {
+        "requesting": {
+          "label": "Requesting Provider",
+          "is_manual_data_entry_allowed": true
+        },
+        "servicing": {
+          "label": "Servicing Provider",
+          "is_manual_data_entry_allowed": true
+        },
+        "additional_provider_1": {
+          "label": "Additional Provider",
+          "is_manual_data_entry_allowed": true,
+          "description": "This is the additional provider",
+          "provider_type_identifier": "DD",
+          "provider_type": "account_org",
+          "required": true
+        },
+        "additional_provider_2": {
+          "label": "Additional Provider 2: The last Provider",
+          "is_manual_data_entry_allowed": true,
+          "description": "This is the additional provider 2",
+          "provider_type_identifier": "DD",
+          "provider_type": "practitioner",
+          "required": false
+        }
+      }
+    },
+    {
+      "code": "42",
+      "configuration_override": true,
+      "places_of_service": [{ "code": "12" }],
+      "providers": {
+        "requesting": {
+          "label": "Requesting Provider",
+          "is_manual_data_entry_allowed": true
+        },
+        "servicing": {
+          "label": "Servicing Provider",
+          "is_manual_data_entry_allowed": true
+        }
+      }
+    },
+    {
+      "code": "44",
+      "configuration_override": true,
+      "places_of_service": [{ "code": "12" }],
+      "providers": {
+        "requesting": {
+          "label": "Requesting Provider",
+          "is_manual_data_entry_allowed": false
+        },
+        "servicing": {
+          "label": "Servicing Provider",
+          "is_manual_data_entry_allowed": true
+        },
+        "additional_provider_1": {
+          "label": "Assistant Surgeon",
+          "is_manual_data_entry_allowed": true,
+          "description": "The location where the surgery will be performed.",
+          "provider_type_identifier": "DD",
+          "provider_type": "practitioner"
+        }
+      }
+    },
+    {
+      "code": "77",
+      "configuration_override": false,
+      "places_of_service": [{ "code": "12" }],
+      "providers": {
+        "requesting": {
+          "label": "Requesting Provider",
+          "is_manual_data_entry_allowed": true
+        },
+        "servicing": {
+          "label": "Servicing Provider",
+          "is_manual_data_entry_allowed": true
+        },
+        "additional_provider_1": {
+          "label": "Assistant Surgeon",
+          "is_manual_data_entry_allowed": true,
+          "description": "The location where the surgery will be performed.",
+          "provider_type_identifier": "DD",
+          "provider_type": "account_org"
+        }
+      }
+    },
+    {
+      "code": "86",
+      "configuration_override": true,
+      "places_of_service": [{ "code": "21" }]
+    },
+    {
+      "code": "9",
+      "configuration_override": false,
+      "places_of_service": [{ "code": "21" }]
+    }
+  ],
+  "admission_type": {
+    "codes": ["1", "2", "3", "4", "5", "9"],
+    "helptext": "<b>Elective:</b> Patient is admitted through scheduling.</br><b>Urgent:</b> Patient is admitted unscheduled through a recommendation by a provider.</br><b>Emergency:</b> Patient is admitted unscheduled by a provider.</br><b>Newborn:</b> Maternity admissions.</br><b>Trauma Center:</b> Visit to a licensed trauma center/hospital as licensed by state or local government.</br><b>Unknown:</b> The type of admission is not available."
+  },
+  "level_of_service": {
+    "default_codes": ["U"],
+    "codes": ["03", "U", "E"],
+    "helptext": "<b>Elective:</b> Patient is admitted through scheduling.</br><b>Urgent:</b> Patient is admitted unscheduled through a recommendation by a provider.</br><b>Emergency:</b> Patient is admitted unscheduled by a provider."
+  },
+  "allow_provider_search_without_product": false,
+  "filter_vendors_on_member_pcp_group": false,
+  "validation": {
+    "manuallyenteredrequestingprovider": {
+      "npi": { "requiredalways": { "is_inactive": true } }
+    },
+    "manuallyenteredservicingprovider": {
+      "providername": { "requiredalways": { "is_inactive": false } },
+      "practitionerfirstname": { "requiredalways": { "is_inactive": true } },
+      "practitionerlastname": { "requiredalways": { "is_inactive": true } },
+      "npi": { "requiredalways": { "is_inactive": true } }
+    },
+    "manuallyenteredadditionalprovider1": {
+      "npi": {
+        "requiredifcondition": {
+          "dependency_value_type": "object_value",
+          "dependent_on_property": "ProviderTypeIdentifier",
+          "required_on_value": "DD",
+          "is_inactive": false
+        }
+      }
+    },
+    "manuallyenteredadditionalprovider2": {
+      "npi": {
+        "requiredifcondition": {
+          "dependency_value_type": "object_value",
+          "dependent_on_property": "ProviderTypeIdentifier",
+          "required_on_value": "DD",
+          "is_inactive": false
+        }
+      }
+    },
+    "create": {
+      "dischargedate": {
+        "dategreaterthanequalotherdate": {
+          "dependent_on_property": "AdmissionDate"
+        },
+        "requiredifcondition": {
+          "dependency_value_type": "object_value",
+          "dependent_on_property": "AuthorizationType",
+          "required_on_value": "0"
+        }
+      },
+      "admissiontype": {
+        "requiredifcondition": {
+          "dependency_value_type": "object_value",
+          "dependent_on_property": "AuthorizationType",
+          "required_on_value": "0"
+        },
+        "visible": { "is_inactive": false }
+      },
+      "levelofservice": {
+        "requiredifcondition": {
+          "dependency_value_type": "object_value",
+          "dependent_on_property": "LevelOfServiceEnabled",
+          "required_on_value": true,
+          "is_inactive": false
+        }
+      },
+      "effectivedate": {
+        "datenotprior": { "span": 30, "span_type": "days" },
+        "requiredifcondition": {
+          "dependency_value_type": "object_value",
+          "dependent_on_property": "AuthorizationType",
+          "required_on_value": "1"
+        },
+        "datenotbeyond": { "span": 7, "span_type": "days" }
+      },
+      "admissiondate": {
+        "datenotprior": { "span": 30, "span_type": "days" },
+        "requiredifcondition": {
+          "dependency_value_type": "object_value",
+          "dependent_on_property": "AuthorizationType",
+          "required_on_value": "0"
+        },
+        "datenotbeyond": { "span": 7, "span_type": "days" }
+      },
+      "diagnosiscodelist": {
+        "visible": { "is_inactive": false },
+        "diagnosiscodevalidity": {
+          "min_code_count": 1,
+          "max_code_count": 4,
+          "is_inactive": false
+        }
+      },
+      "requestingprovider": {
+        "practitioneraccountorganizationvalidity": {
+          "account_organization_name_required": true,
+          "account_organization_npi_required": true,
+          "account_organization_tax_id_required": true,
+          "account_organization_id_required": true,
+          "account_organization_alternate_id_required": true,
+          "account_organization_specialty_required": false,
+          "practitioner_name_required": false,
+          "practitioner_npi_required": false,
+          "practitioner_tax_id_required": false,
+          "practitioner_id_required": false,
+          "practitioner_alternate_id_required": false,
+          "practitioner_specialty_required": false,
+          "provider_contact_information": "Someone at 123-456-7890"
+        }
+      },
+      "servicingprovider": {
+        "visible": { "is_inactive": false },
+        "requiredalways": { "is_inactive": false },
+        "practitioneraccountorganizationvalidity": {
+          "account_organization_name_required": true,
+          "account_organization_npi_required": true,
+          "account_organization_tax_id_required": true,
+          "account_organization_id_required": false,
+          "account_organization_alternate_id_required": true,
+          "account_organization_specialty_required": true,
+          "practitioner_name_required": false,
+          "practitioner_npi_required": false,
+          "practitioner_tax_id_required": false,
+          "practitioner_id_required": false,
+          "practitioner_alternate_id_required": false,
+          "practitioner_specialty_required": false,
+          "provider_contact_information": "Someone at 123-456-7890"
+        }
+      },
+      "additionalprovider1": {
+        "practitioneraccountorganizationvalidity": {
+          "account_organization_name_required": true,
+          "account_organization_npi_required": true,
+          "account_organization_tax_id_required": true,
+          "account_organization_id_required": false,
+          "account_organization_alternate_id_required": true,
+          "account_organization_specialty_required": true,
+          "practitioner_name_required": false,
+          "practitioner_npi_required": false,
+          "practitioner_tax_id_required": false,
+          "practitioner_id_required": false,
+          "practitioner_alternate_id_required": false,
+          "practitioner_specialty_required": false,
+          "provider_contact_information": "Someone at 123-456-7890"
+        }
+      },
+      "additionalprovider2": {
+        "practitioneraccountorganizationvalidity": {
+          "account_organization_name_required": true,
+          "account_organization_npi_required": true,
+          "account_organization_tax_id_required": true,
+          "account_organization_id_required": true,
+          "account_organization_alternate_id_required": true,
+          "account_organization_specialty_required": true,
+          "practitioner_name_required": false,
+          "practitioner_npi_required": false,
+          "practitioner_tax_id_required": false,
+          "practitioner_id_required": false,
+          "practitioner_alternate_id_required": false,
+          "practitioner_specialty_required": false,
+          "provider_contact_information": "Someone at 123-456-7890"
+        }
+      },
+      "notes": { "maximumlengthfortextarea": { "length": 264 } },
+      "servicelines": {
+        "configurableservicelinevalidity": {
+          "max_code_count": 12,
+          "account_organization_name_required": false,
+          "account_organization_npi_required": false,
+          "account_organization_tax_id_required": false,
+          "account_organization_id_required": false,
+          "account_organization_alternate_id_required": false,
+          "account_organization_specialty_required": false,
+          "practitioner_name_required": false,
+          "practitioner_npi_required": false,
+          "practitioner_tax_id_required": false,
+          "practitioner_id_required": false,
+          "practitioner_alternate_id_required": false,
+          "practitioner_specialty_required": false,
+          "provider_contact_information": "Someone at 123-456-7890",
+          "provider_required": false,
+          "provider_visible": true
+        }
+      },
+      "authorizationplaceofservice": {
+        "visible": { "is_inactive": false },
+        "requiredalways": { "is_inactive": false }
+      },
+      "contactfirstname": {
+        "minimumlength": { "length": 1 },
+        "maximumlength": { "length": 30 },
+        "visible": { "is_inactive": false },
+        "contactinforequiredalways": { "is_inactive": true }
+      },
+      "contactlastname": {
+        "minimumlength": { "length": 1 },
+        "maximumlength": { "length": 40 },
+        "visible": { "is_inactive": false },
+        "contactinforequiredalways": { "is_inactive": true }
+      },
+      "contactphonenumber": {
+        "visible": { "is_inactive": false },
+        "contactinforequiredalways": { "is_inactive": true },
+        "contactvalidity": { "is_inactive": true }
+      },
+      "contactphonenumberextension": {
+        "visible": { "is_inactive": false },
+        "contactvalidity": { "is_inactive": true }
+      },
+      "contactfaxnumber": {
+        "visible": { "is_inactive": false },
+        "contactinforequiredalways": { "is_inactive": true },
+        "contactvalidity": { "is_inactive": true }
+      },
+      "contactfaxnumberextension": {
+        "visible": { "is_inactive": false },
+        "contactvalidity": { "is_inactive": true }
+      },
+      "contactemailaddress": {
+        "minimumlength": { "length": 1 },
+        "maximumlength": { "length": 256 },
+        "visible": { "is_inactive": false },
+        "contactinforequiredalways": { "is_inactive": true }
+      },
+      "newbornfirstname": {
+        "requiredifcondition": {
+          "dependency_value_type": "object_value",
+          "dependent_on_property": "NewbornAuthorization",
+          "required_on_value": true,
+          "is_inactive": false
+        },
+        "maximumlength": { "length": 30 }
+      },
+      "newbornlastname": { "maximumlength": { "length": 30 } }
+    }
+  },
+  "providerfrom": {
+    "filter": {
+      "practitioner": true,
+      "is_group": true,
+      "is_pcp": true,
+      "is_specialist": true,
+      "is_individual": false
+    },
+    "display_practitioner_columns": {
+      "provider_header": "Payer ID",
+      "provider_npi": true,
+      "provider_id": true,
+      "address": true,
+      "taxonomy": true,
+      "provider_alt_id": true,
+      "tax_id": true
+    },
+    "display_account_organization_columns": {
+      "group_header": "Payer ID",
+      "group_id": true,
+      "address": true,
+      "taxonomy": true,
+      "alternate_id": true,
+      "tax_id": true
+    }
+  },
+  "providerto": {
+    "filter": {
+      "is_pcp": true,
+      "is_specialist": false,
+      "is_individual": false,
+      "is_par": false
+    },
+    "display_practitioner_columns": {
+      "provider_header": "Payer ID",
+      "provider_npi": false,
+      "provider_id": false,
+      "address": false,
+      "taxonomy": true,
+      "provider_alt_id": true,
+      "tax_id": true
+    },
+    "display_account_organization_columns": {
+      "group_header": "Payer ID",
+      "group_id": true,
+      "alternate_id": true
+    }
+  },
+  "providertoserviceline": {
+    "filter": {
+      "is_pcp": true,
+      "is_specialist": false,
+      "is_individual": false,
+      "is_par": false
+    },
+    "display_practitioner_columns": {
+      "provider_header": "Payer ID",
+      "provider_npi": true,
+      "provider_id": true,
+      "address": true,
+      "taxonomy": true,
+      "provider_alt_id": true,
+      "tax_id": true
+    },
+    "display_account_organization_columns": {
+      "group_header": "Payer ID",
+      "group_id": true,
+      "alternate_id": true
+    }
+  },
+  "provider_types": {
+    "practitioner": {
+      "display_practitioner_columns": {
+        "provider_header": "Payer ID",
+        "provider_npi": true,
+        "provider_id": false,
+        "address": true,
+        "taxonomy": true,
+        "provider_alt_id": false,
+        "tax_id": true
+      }
+    },
+    "account_org": {
+      "display_account_organization_columns": {
+        "group_header": "Payer ID",
+        "group_id": true,
+        "address": true,
+        "taxonomy": true,
+        "alternate_id": true,
+        "tax_id": true
+      }
+    }
+  },
+  "note_to_patients": {
+    "display": "true",
+    "header": "Note to Patient",
+    "text": "This Authorization is valid at any location for the above group."
+  },
+  "error_message": "Please call Aries Health Plan at 800-555-1324 to get this fixed.",
+  "instruction_links": [
+    {
+      "link_name": "Medical Authorizations",
+      "header": "HMO/POS Authorization Instructions",
+      "content": "Members with Direct Point-of-Service coverage only require authorizations for the following services: Physical Therapy, Occupational Therapy, Lab/X-Ray, and Spinal Manipulations."
+    },
+    {
+      "link_name": "OG/GYN Authorizations",
+      "header": "OG/GYN Authorization Instructions",
+      "content": "Members with Direct Point-of-Service coverage only require authorizations for the following services: Physical Therapy, Occupational Therapy, Lab/X-Ray, and Spinal Manipulations."
+    }
+  ],
+  "advanced_authorizations_enabled": false,
+  "servicing_provider_decision_support": {
+    "is_enabled": true,
+    "benefit_tier_column_tooltip": "Tiered Benefit Products offer different member cost-sharing by tier and offers members lower out-of-pocket costs (e.g. copayment) for most services when members are referred to a provider in the Preferred benefit tier.",
+    "program_column_tooltip": "Value Option: A program of high quality providers as based on quality metrics as define by Aries. To learn more about how to become a high quality provider, contact Aries at 555-555-5555.",
+    "program_column_label": "Program",
+    "programs": [
+      { "id": "ProcedurePlus", "name": "Green Care" },
+      { "id": "SpecialtyPlus", "name": "Blue Care" }
+    ]
+  },
+  "servicelines_dates_enabled": true,
+  "servicing_provider_search_specialty_required": false,
+  "pre_screening_questions_configuration": {
+    "display_pre_screening_questions": true,
+    "pre_screening_questions": [
+      {
+        "question": "Is this case the result of an event or accident at work?",
+        "display": "true",
+        "response": "For workplace related illness or injury, it is likely that the patient's services are covered by the workers' compensation coverage under their employer. Please contact that carrier for payment authorization."
+      },
+      {
+        "question": "Are you amending an existing authorization?",
+        "display": "true",
+        "response": "To amend an existing authorization, please call 800-555-2387"
+      },
+      {
+        "question": "Are you requesting an authorization for a physical therapy extension?",
+        "display": "true",
+        "response": "To extend an authorization for physical therapy, please call 800-555-8236"
+      }
+    ]
+  },
+  "states": [
+    "AL",
+    "AK",
+    "AZ",
+    "AR",
+    "CA",
+    "CO",
+    "CT",
+    "DE",
+    "FL",
+    "GA",
+    "HI",
+    "ID",
+    "IL",
+    "IN",
+    "IA",
+    "KS",
+    "KY",
+    "LA",
+    "ME",
+    "MD",
+    "MA",
+    "MI",
+    "MN",
+    "MS",
+    "MO",
+    "MT",
+    "NE",
+    "NV",
+    "NH",
+    "NJ",
+    "NM",
+    "NY",
+    "NC",
+    "ND",
+    "OH",
+    "OK",
+    "OR",
+    "PA",
+    "RI",
+    "SC",
+    "SD",
+    "TN",
+    "TX",
+    "UT",
+    "VT",
+    "VA",
+    "WA",
+    "WV",
+    "WI",
+    "WY"
+  ],
+  "tiers_info": "Tiered Benefit Products offer members cost-sharing by tier and lower out-of-pocket costs (e.g., copayment) for most services when they are referred to a provider in the Preferred benefit tier.",
+  "eb_link_enabled": true,
+  "previous_authorization": {
+    "name": "Previous Authorization Number",
+    "enable_link": "true"
+  },
+  "custom_content_sections": [
+    {
+      "id": "submission-content-page-header",
+      "is_enabled": true,
+      "is_async": false
+    },
+    {
+      "id": "submission-create-page-header",
+      "is_enabled": true,
+      "is_async": false
+    },
+    {
+      "id": "submission-requesting-provider-annotation",
+      "is_enabled": true,
+      "is_async": false
+    },
+    {
+      "id": "submission-servicing-provider-annotation",
+      "is_enabled": true,
+      "is_async": false
+    },
+    { "id": "details-page-header", "is_enabled": true, "is_async": false },
+    { "id": "print-additional-details", "is_enabled": true, "is_async": true },
+    {
+      "id": "submission-service-line-servicing-provider-annotation",
+      "is_enabled": true,
+      "is_async": true
+    },
+    { "id": "aries-survey-1-content", "is_enabled": true, "is_async": false },
+    { "id": "aries-survey-2-content", "is_enabled": true, "is_async": false },
+    {
+      "id": "submission-service-type-annotation",
+      "is_enabled": true,
+      "is_async": false
+    },
+    {
+      "id": "submission-content-page-service-type-annotation",
+      "is_enabled": true,
+      "is_async": false
+    },
+    {
+      "id": "submission-intercept-modal-dialog-content",
+      "is_enabled": true,
+      "is_async": false
+    },
+    {
+      "id": "submission-amend-page-header",
+      "is_enabled": true,
+      "is_async": false
+    },
+    {
+      "id": "submission-amend-page-service-type-annotation",
+      "is_enabled": true,
+      "is_async": false
+    }
+  ]
+}

@@ -1,0 +1,1114 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "title": "The root schema",
+  "description": "The root schema comprises the entire JSON document.",
+  "default": {},
+  "examples": [
+    {
+      "feature_xri": "xri://@navinet.net/trading-partner/aries/eb2ui",
+      "access_control_descriptors": {
+        "inquiry": {
+          "resource_path": "All/PlanServices/Aries/Eligibility & Benefits/EligibilityBenefits"
+        }
+      },
+      "details": {
+        "benefits": {
+          "display_insurance_type_and_product": true
+        },
+        "clinical_documents": {
+          "enabled": false
+        },
+        "disclaimer": "Receipt or use of this information does not guarantee payment of any healthcare claim and such information is subject to change, even retroactively, at any time.",
+        "member_id_card": {
+          "enabled": true,
+          "display": {
+            "content_type": "image/png",
+            "messages": {
+              "disclaimer": "Please refer to the proper network tier that corresponds to the plan member's ID card.",
+              "error": "Member ID card is not available"
+            }
+          },
+          "integration": {
+            "request": {
+              "url": "/v1/integration/plans/aries/services/member-id-card",
+              "body": {
+                "memberId": "$.demographic_information.ids.member_id",
+                "memberFirstName": "$.demographic_information.name.first",
+                "memberLastName": "$.demographic_information.name.last",
+                "memberDateOfBirth": "$.demographic_information.dates.birth_date"
+              }
+            }
+          }
+        },
+        "network": {
+          "labels": {
+            "preferred": "Aries Preferred"
+          },
+          "map_in_out_benefits_to_networks": ["in", "out"],
+          "sort_type": "Network-Name"
+        },
+        "plan_coverage_status": {
+          "status_5_display_message": "The member's account is delinquent. Claims may pend until the account balance is paid in full.",
+          "status_6_display_message": "Member did not have coverage for this service(s) on the date entered. Unable to return detailed results.",
+          "status_7_display_message": "",
+          "status_8_display_message": "For more information please call (888) 987-4605."
+        },
+        "supported_service_type_codes": [
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "12",
+          "13",
+          "18",
+          "20",
+          "23",
+          "30",
+          "33",
+          "40",
+          "42",
+          "45",
+          "48",
+          "50",
+          "53",
+          "59",
+          "62",
+          "64",
+          "65",
+          "68",
+          "69",
+          "73",
+          "75",
+          "76",
+          "78",
+          "80",
+          "81",
+          "82",
+          "83",
+          "86",
+          "88",
+          "98",
+          "99",
+          "A0",
+          "A3",
+          "AC",
+          "AD",
+          "AE",
+          "AF",
+          "AG",
+          "AL",
+          "BG",
+          "BH",
+          "BT",
+          "PT",
+          "UC"
+        ]
+      },
+      "search_results": {
+        "display_product_coverage_columns": true
+      },
+      "search": {
+        "default_service_type_interaction_with_plan_defaults": "ignore",
+        "minimum_search_criteria": {
+          "primary": ["member-id"],
+          "alternate": ["last-name", "date-of-birth"]
+        },
+        "validation": {
+          "date_of_service": {
+            "allowed_days_in_future": 30,
+            "allowed_days_in_past": 365
+          },
+          "member_id": {
+            "min_length": 2,
+            "max_length": 80,
+            "format_validation_regex": "^[a-zA-Z0-9]*$",
+            "format_validation_error": "Member ID can only contain letters and numbers"
+          },
+          "last_name": {
+            "min_length": 1,
+            "max_length": 60
+          },
+          "first_name": {
+            "min_length": 1,
+            "max_length": 35,
+            "is_required": false
+          },
+          "date_of_birth": {}
+        }
+      }
+    }
+  ],
+  "required": [
+    "feature_xri",
+    "access_control_descriptors",
+    "details",
+    "search_results",
+    "search"
+  ],
+  "properties": {
+    "feature_xri": {
+      "$id": "#/properties/feature_xri",
+      "type": "string",
+      "title": "Feature XRI",
+      "description": "Feature XRI - this is the ",
+      "default": "",
+      "examples": ["xri://@navinet.net/trading-partner/aries/eb2ui"]
+    },
+    "access_control_descriptors": {
+      "$id": "#/properties/access_control_descriptors",
+      "type": "object",
+      "title": "Access Control Descriptors",
+      "description": "An explanation about the purpose of Access Control Descriptors.",
+      "default": {},
+      "examples": [
+        {
+          "inquiry": {
+            "resource_path": "All/PlanServices/Aries/Eligibility & Benefits/EligibilityBenefits"
+          }
+        }
+      ],
+      "required": ["inquiry"],
+      "properties": {
+        "inquiry": {
+          "$id": "#/properties/access_control_descriptors/properties/inquiry",
+          "type": "object",
+          "title": "The inquiry schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": {},
+          "examples": [
+            {
+              "resource_path": "All/PlanServices/Aries/Eligibility & Benefits/EligibilityBenefits"
+            }
+          ],
+          "required": ["resource_path"],
+          "properties": {
+            "resource_path": {
+              "$id": "#/properties/access_control_descriptors/properties/inquiry/properties/resource_path",
+              "type": "string",
+              "title": "The resource_path schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": "",
+              "examples": [
+                "All/PlanServices/Aries/Eligibility & Benefits/EligibilityBenefits"
+              ]
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "details": {
+      "$id": "#/properties/details",
+      "type": "object",
+      "title": "The details schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "benefits": {
+            "display_insurance_type_and_product": true
+          },
+          "clinical_documents": {
+            "enabled": false
+          },
+          "disclaimer": "Receipt or use of this information does not guarantee payment of any healthcare claim and such information is subject to change, even retroactively, at any time.",
+          "member_id_card": {
+            "enabled": true,
+            "display": {
+              "content_type": "image/png",
+              "messages": {
+                "disclaimer": "Please refer to the proper network tier that corresponds to the plan member's ID card.",
+                "error": "Member ID card is not available"
+              }
+            },
+            "integration": {
+              "request": {
+                "url": "/v1/integration/plans/aries/services/member-id-card",
+                "body": {
+                  "memberId": "$.demographic_information.ids.member_id",
+                  "memberFirstName": "$.demographic_information.name.first",
+                  "memberLastName": "$.demographic_information.name.last",
+                  "memberDateOfBirth": "$.demographic_information.dates.birth_date"
+                }
+              }
+            }
+          },
+          "network": {
+            "labels": {
+              "preferred": "Aries Preferred"
+            },
+            "map_in_out_benefits_to_networks": ["in", "out"],
+            "sort_type": "Network-Name"
+          },
+          "plan_coverage_status": {
+            "status_5_display_message": "The member's account is delinquent. Claims may pend until the account balance is paid in full.",
+            "status_6_display_message": "Member did not have coverage for this service(s) on the date entered. Unable to return detailed results.",
+            "status_7_display_message": "",
+            "status_8_display_message": "For more information please call (888) 987-4605."
+          },
+          "supported_service_type_codes": [
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "12",
+            "13",
+            "18",
+            "20",
+            "23",
+            "30",
+            "33",
+            "40",
+            "42",
+            "45",
+            "48",
+            "50",
+            "53",
+            "59",
+            "62",
+            "64",
+            "65",
+            "68",
+            "69",
+            "73",
+            "75",
+            "76",
+            "78",
+            "80",
+            "81",
+            "82",
+            "83",
+            "86",
+            "88",
+            "98",
+            "99",
+            "A0",
+            "A3",
+            "AC",
+            "AD",
+            "AE",
+            "AF",
+            "AG",
+            "AL",
+            "BG",
+            "BH",
+            "BT",
+            "PT",
+            "UC"
+          ]
+        }
+      ],
+      "required": [
+        "benefits",
+        "clinical_documents",
+        "disclaimer",
+        "member_id_card",
+        "network",
+        "plan_coverage_status",
+        "supported_service_type_codes"
+      ],
+      "properties": {
+        "benefits": {
+          "$id": "#/properties/details/properties/benefits",
+          "type": "object",
+          "title": "The benefits schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": {},
+          "examples": [
+            {
+              "display_insurance_type_and_product": true
+            }
+          ],
+          "required": ["display_insurance_type_and_product"],
+          "properties": {
+            "display_insurance_type_and_product": {
+              "$id": "#/properties/details/properties/benefits/properties/display_insurance_type_and_product",
+              "type": "boolean",
+              "title": "The display_insurance_type_and_product schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": false,
+              "examples": [true]
+            }
+          },
+          "additionalProperties": true
+        },
+        "clinical_documents": {
+          "$id": "#/properties/details/properties/clinical_documents",
+          "type": "object",
+          "title": "The clinical_documents schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": {},
+          "examples": [
+            {
+              "enabled": false
+            }
+          ],
+          "required": ["enabled"],
+          "properties": {
+            "enabled": {
+              "$id": "#/properties/details/properties/clinical_documents/properties/enabled",
+              "type": "boolean",
+              "title": "The enabled schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": false,
+              "examples": [false]
+            }
+          },
+          "additionalProperties": true
+        },
+        "disclaimer": {
+          "$id": "#/properties/details/properties/disclaimer",
+          "type": "string",
+          "title": "The disclaimer schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "Receipt or use of this information does not guarantee payment of any healthcare claim and such information is subject to change, even retroactively, at any time."
+          ]
+        },
+        "member_id_card": {
+          "$id": "#/properties/details/properties/member_id_card",
+          "type": "object",
+          "title": "The member_id_card schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": {},
+          "examples": [
+            {
+              "enabled": true,
+              "display": {
+                "content_type": "image/png",
+                "messages": {
+                  "disclaimer": "Please refer to the proper network tier that corresponds to the plan member's ID card.",
+                  "error": "Member ID card is not available"
+                }
+              },
+              "integration": {
+                "request": {
+                  "url": "/v1/integration/plans/aries/services/member-id-card",
+                  "body": {
+                    "memberId": "$.demographic_information.ids.member_id",
+                    "memberFirstName": "$.demographic_information.name.first",
+                    "memberLastName": "$.demographic_information.name.last",
+                    "memberDateOfBirth": "$.demographic_information.dates.birth_date"
+                  }
+                }
+              }
+            }
+          ],
+          "required": ["enabled", "display", "integration"],
+          "properties": {
+            "enabled": {
+              "$id": "#/properties/details/properties/member_id_card/properties/enabled",
+              "type": "boolean",
+              "title": "The enabled schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": false,
+              "examples": [true]
+            },
+            "display": {
+              "$id": "#/properties/details/properties/member_id_card/properties/display",
+              "type": "object",
+              "title": "The display schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": {},
+              "examples": [
+                {
+                  "content_type": "image/png",
+                  "messages": {
+                    "disclaimer": "Please refer to the proper network tier that corresponds to the plan member's ID card.",
+                    "error": "Member ID card is not available"
+                  }
+                }
+              ],
+              "required": ["content_type", "messages"],
+              "properties": {
+                "content_type": {
+                  "$id": "#/properties/details/properties/member_id_card/properties/display/properties/content_type",
+                  "type": "string",
+                  "title": "The content_type schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": "",
+                  "examples": ["image/png"]
+                },
+                "messages": {
+                  "$id": "#/properties/details/properties/member_id_card/properties/display/properties/messages",
+                  "type": "object",
+                  "title": "The messages schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": {},
+                  "examples": [
+                    {
+                      "disclaimer": "Please refer to the proper network tier that corresponds to the plan member's ID card.",
+                      "error": "Member ID card is not available"
+                    }
+                  ],
+                  "required": ["disclaimer", "error"],
+                  "properties": {
+                    "disclaimer": {
+                      "$id": "#/properties/details/properties/member_id_card/properties/display/properties/messages/properties/disclaimer",
+                      "type": "string",
+                      "title": "The disclaimer schema",
+                      "description": "An explanation about the purpose of this instance.",
+                      "default": "",
+                      "examples": [
+                        "Please refer to the proper network tier that corresponds to the plan member's ID card."
+                      ]
+                    },
+                    "error": {
+                      "$id": "#/properties/details/properties/member_id_card/properties/display/properties/messages/properties/error",
+                      "type": "string",
+                      "title": "The error schema",
+                      "description": "An explanation about the purpose of this instance.",
+                      "default": "",
+                      "examples": ["Member ID card is not available"]
+                    }
+                  },
+                  "additionalProperties": true
+                }
+              },
+              "additionalProperties": true
+            },
+            "integration": {
+              "$id": "#/properties/details/properties/member_id_card/properties/integration",
+              "type": "object",
+              "title": "The integration schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": {},
+              "examples": [
+                {
+                  "request": {
+                    "url": "/v1/integration/plans/aries/services/member-id-card",
+                    "body": {
+                      "memberId": "$.demographic_information.ids.member_id",
+                      "memberFirstName": "$.demographic_information.name.first",
+                      "memberLastName": "$.demographic_information.name.last",
+                      "memberDateOfBirth": "$.demographic_information.dates.birth_date"
+                    }
+                  }
+                }
+              ],
+              "required": ["request"],
+              "properties": {
+                "request": {
+                  "$id": "#/properties/details/properties/member_id_card/properties/integration/properties/request",
+                  "type": "object",
+                  "title": "The request schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": {},
+                  "examples": [
+                    {
+                      "url": "/v1/integration/plans/aries/services/member-id-card",
+                      "body": {
+                        "memberId": "$.demographic_information.ids.member_id",
+                        "memberFirstName": "$.demographic_information.name.first",
+                        "memberLastName": "$.demographic_information.name.last",
+                        "memberDateOfBirth": "$.demographic_information.dates.birth_date"
+                      }
+                    }
+                  ],
+                  "required": ["url", "body"],
+                  "properties": {
+                    "url": {
+                      "$id": "#/properties/details/properties/member_id_card/properties/integration/properties/request/properties/url",
+                      "type": "string",
+                      "title": "The url schema",
+                      "description": "An explanation about the purpose of this instance.",
+                      "default": "",
+                      "examples": [
+                        "/v1/integration/plans/aries/services/member-id-card"
+                      ]
+                    },
+                    "body": {
+                      "$id": "#/properties/details/properties/member_id_card/properties/integration/properties/request/properties/body",
+                      "type": "object",
+                      "title": "The body schema",
+                      "description": "An explanation about the purpose of this instance.",
+                      "default": {},
+                      "examples": [
+                        {
+                          "memberId": "$.demographic_information.ids.member_id",
+                          "memberFirstName": "$.demographic_information.name.first",
+                          "memberLastName": "$.demographic_information.name.last",
+                          "memberDateOfBirth": "$.demographic_information.dates.birth_date"
+                        }
+                      ],
+                      "required": [
+                        "memberId",
+                        "memberFirstName",
+                        "memberLastName",
+                        "memberDateOfBirth"
+                      ],
+                      "properties": {
+                        "memberId": {
+                          "$id": "#/properties/details/properties/member_id_card/properties/integration/properties/request/properties/body/properties/memberId",
+                          "type": "string",
+                          "title": "The memberId schema",
+                          "description": "An explanation about the purpose of this instance.",
+                          "default": "",
+                          "examples": [
+                            "$.demographic_information.ids.member_id"
+                          ]
+                        },
+                        "memberFirstName": {
+                          "$id": "#/properties/details/properties/member_id_card/properties/integration/properties/request/properties/body/properties/memberFirstName",
+                          "type": "string",
+                          "title": "The memberFirstName schema",
+                          "description": "An explanation about the purpose of this instance.",
+                          "default": "",
+                          "examples": ["$.demographic_information.name.first"]
+                        },
+                        "memberLastName": {
+                          "$id": "#/properties/details/properties/member_id_card/properties/integration/properties/request/properties/body/properties/memberLastName",
+                          "type": "string",
+                          "title": "The memberLastName schema",
+                          "description": "An explanation about the purpose of this instance.",
+                          "default": "",
+                          "examples": ["$.demographic_information.name.last"]
+                        },
+                        "memberDateOfBirth": {
+                          "$id": "#/properties/details/properties/member_id_card/properties/integration/properties/request/properties/body/properties/memberDateOfBirth",
+                          "type": "string",
+                          "title": "The memberDateOfBirth schema",
+                          "description": "An explanation about the purpose of this instance.",
+                          "default": "",
+                          "examples": [
+                            "$.demographic_information.dates.birth_date"
+                          ]
+                        }
+                      },
+                      "additionalProperties": true
+                    }
+                  },
+                  "additionalProperties": true
+                }
+              },
+              "additionalProperties": true
+            }
+          },
+          "additionalProperties": true
+        },
+        "network": {
+          "$id": "#/properties/details/properties/network",
+          "type": "object",
+          "title": "The network schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": {},
+          "examples": [
+            {
+              "labels": {
+                "preferred": "Aries Preferred"
+              },
+              "map_in_out_benefits_to_networks": ["in", "out"],
+              "sort_type": "Network-Name"
+            }
+          ],
+          "required": [
+            "labels",
+            "map_in_out_benefits_to_networks",
+            "sort_type"
+          ],
+          "properties": {
+            "labels": {
+              "$id": "#/properties/details/properties/network/properties/labels",
+              "type": "object",
+              "title": "The labels schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": {},
+              "examples": [
+                {
+                  "preferred": "Aries Preferred"
+                }
+              ],
+              "required": ["preferred"],
+              "properties": {
+                "preferred": {
+                  "$id": "#/properties/details/properties/network/properties/labels/properties/preferred",
+                  "type": "string",
+                  "title": "The preferred schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": "",
+                  "examples": ["Aries Preferred"]
+                }
+              },
+              "additionalProperties": true
+            },
+            "map_in_out_benefits_to_networks": {
+              "$id": "#/properties/details/properties/network/properties/map_in_out_benefits_to_networks",
+              "type": "array",
+              "title": "The map_in_out_benefits_to_networks schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": [],
+              "examples": [["in", "out"]],
+              "additionalItems": true,
+              "items": {
+                "$id": "#/properties/details/properties/network/properties/map_in_out_benefits_to_networks/items",
+                "anyOf": [
+                  {
+                    "$id": "#/properties/details/properties/network/properties/map_in_out_benefits_to_networks/items/anyOf/0",
+                    "type": "string",
+                    "title": "The first anyOf schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": ["in", "out"]
+                  }
+                ]
+              }
+            },
+            "sort_type": {
+              "$id": "#/properties/details/properties/network/properties/sort_type",
+              "type": "string",
+              "title": "The sort_type schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": "",
+              "examples": ["Network-Name"]
+            }
+          },
+          "additionalProperties": true
+        },
+        "plan_coverage_status": {
+          "$id": "#/properties/details/properties/plan_coverage_status",
+          "type": "object",
+          "title": "The plan_coverage_status schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": {},
+          "examples": [
+            {
+              "status_5_display_message": "The member's account is delinquent. Claims may pend until the account balance is paid in full.",
+              "status_6_display_message": "Member did not have coverage for this service(s) on the date entered. Unable to return detailed results.",
+              "status_7_display_message": "",
+              "status_8_display_message": "For more information please call (888) 987-4605."
+            }
+          ],
+          "required": [
+            "status_5_display_message",
+            "status_6_display_message",
+            "status_7_display_message",
+            "status_8_display_message"
+          ],
+          "properties": {
+            "status_5_display_message": {
+              "$id": "#/properties/details/properties/plan_coverage_status/properties/status_5_display_message",
+              "type": "string",
+              "title": "The status_5_display_message schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": "",
+              "examples": [
+                "The member's account is delinquent. Claims may pend until the account balance is paid in full."
+              ]
+            },
+            "status_6_display_message": {
+              "$id": "#/properties/details/properties/plan_coverage_status/properties/status_6_display_message",
+              "type": "string",
+              "title": "The status_6_display_message schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": "",
+              "examples": [
+                "Member did not have coverage for this service(s) on the date entered. Unable to return detailed results."
+              ]
+            },
+            "status_7_display_message": {
+              "$id": "#/properties/details/properties/plan_coverage_status/properties/status_7_display_message",
+              "type": "string",
+              "title": "The status_7_display_message schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": "",
+              "examples": [""]
+            },
+            "status_8_display_message": {
+              "$id": "#/properties/details/properties/plan_coverage_status/properties/status_8_display_message",
+              "type": "string",
+              "title": "The status_8_display_message schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": "",
+              "examples": ["For more information please call (888) 987-4605."]
+            }
+          },
+          "additionalProperties": true
+        },
+        "supported_service_type_codes": {
+          "$id": "#/properties/details/properties/supported_service_type_codes",
+          "type": "array",
+          "title": "The supported_service_type_codes schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": [],
+          "examples": [["4", "5"]],
+          "additionalItems": true,
+          "items": {
+            "$id": "#/properties/details/properties/supported_service_type_codes/items",
+            "anyOf": [
+              {
+                "$id": "#/properties/details/properties/supported_service_type_codes/items/anyOf/0",
+                "type": "string",
+                "title": "The first anyOf schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": ["4", "5"]
+              }
+            ]
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "search_results": {
+      "$id": "#/properties/search_results",
+      "type": "object",
+      "title": "The search_results schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "display_product_coverage_columns": true
+        }
+      ],
+      "required": ["display_product_coverage_columns"],
+      "properties": {
+        "display_product_coverage_columns": {
+          "$id": "#/properties/search_results/properties/display_product_coverage_columns",
+          "type": "boolean",
+          "title": "The display_product_coverage_columns schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [true]
+        }
+      },
+      "additionalProperties": true
+    },
+    "search": {
+      "$id": "#/properties/search",
+      "type": "object",
+      "title": "Search",
+      "description": "This is X type of Search.",
+      "default": {},
+      "examples": [
+        {
+          "default_service_type_interaction_with_plan_defaults": "ignore",
+          "minimum_search_criteria": {
+            "primary": ["member-id"],
+            "alternate": ["last-name", "date-of-birth"]
+          },
+          "validation": {
+            "date_of_service": {
+              "allowed_days_in_future": 30,
+              "allowed_days_in_past": 365
+            },
+            "member_id": {
+              "min_length": 2,
+              "max_length": 80,
+              "format_validation_regex": "^[a-zA-Z0-9]*$",
+              "format_validation_error": "Member ID can only contain letters and numbers"
+            },
+            "last_name": {
+              "min_length": 1,
+              "max_length": 60
+            },
+            "first_name": {
+              "min_length": 1,
+              "max_length": 35,
+              "is_required": false
+            },
+            "date_of_birth": {}
+          }
+        }
+      ],
+      "required": [
+        "default_service_type_interaction_with_plan_defaults",
+        "minimum_search_criteria",
+        "validation"
+      ],
+      "properties": {
+        "default_service_type_interaction_with_plan_defaults": {
+          "$id": "#/properties/search/properties/default_service_type_interaction_with_plan_defaults",
+          "type": "string",
+          "title": "The default_service_type_interaction_with_plan_defaults schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": ["ignore"]
+        },
+        "minimum_search_criteria": {
+          "$id": "#/properties/search/properties/minimum_search_criteria",
+          "type": "object",
+          "title": "The minimum_search_criteria schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": {},
+          "examples": [
+            {
+              "primary": ["member-id"],
+              "alternate": ["last-name", "date-of-birth"]
+            }
+          ],
+          "required": ["primary", "alternate"],
+          "properties": {
+            "primary": {
+              "$id": "#/properties/search/properties/minimum_search_criteria/properties/primary",
+              "type": "array",
+              "title": "The primary schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": [],
+              "examples": [["member-id"]],
+              "additionalItems": true,
+              "items": {
+                "$id": "#/properties/search/properties/minimum_search_criteria/properties/primary/items",
+                "anyOf": [
+                  {
+                    "$id": "#/properties/search/properties/minimum_search_criteria/properties/primary/items/anyOf/0",
+                    "type": "string",
+                    "title": "The first anyOf schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": ["member-id"]
+                  }
+                ]
+              }
+            },
+            "alternate": {
+              "$id": "#/properties/search/properties/minimum_search_criteria/properties/alternate",
+              "type": "array",
+              "title": "The alternate schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": [],
+              "examples": [["last-name", "date-of-birth"]],
+              "additionalItems": true,
+              "items": {
+                "$id": "#/properties/search/properties/minimum_search_criteria/properties/alternate/items",
+                "anyOf": [
+                  {
+                    "$id": "#/properties/search/properties/minimum_search_criteria/properties/alternate/items/anyOf/0",
+                    "type": "string",
+                    "title": "The first anyOf schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": ["last-name", "date-of-birth"]
+                  }
+                ]
+              }
+            }
+          },
+          "additionalProperties": true
+        },
+        "validation": {
+          "$id": "#/properties/search/properties/validation",
+          "type": "object",
+          "title": "The validation schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": {},
+          "examples": [
+            {
+              "date_of_service": {
+                "allowed_days_in_future": 30,
+                "allowed_days_in_past": 365
+              },
+              "member_id": {
+                "min_length": 2,
+                "max_length": 80,
+                "format_validation_regex": "^[a-zA-Z0-9]*$",
+                "format_validation_error": "Member ID can only contain letters and numbers"
+              },
+              "last_name": {
+                "min_length": 1,
+                "max_length": 60
+              },
+              "first_name": {
+                "min_length": 1,
+                "max_length": 35,
+                "is_required": false
+              },
+              "date_of_birth": {}
+            }
+          ],
+          "required": [
+            "date_of_service",
+            "member_id",
+            "last_name",
+            "first_name",
+            "date_of_birth"
+          ],
+          "properties": {
+            "date_of_service": {
+              "$id": "#/properties/search/properties/validation/properties/date_of_service",
+              "type": "object",
+              "title": "The date_of_service schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": {},
+              "examples": [
+                {
+                  "allowed_days_in_future": 30,
+                  "allowed_days_in_past": 365
+                }
+              ],
+              "required": ["allowed_days_in_future", "allowed_days_in_past"],
+              "properties": {
+                "allowed_days_in_future": {
+                  "$id": "#/properties/search/properties/validation/properties/date_of_service/properties/allowed_days_in_future",
+                  "type": "integer",
+                  "title": "The allowed_days_in_future schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": 0,
+                  "examples": [30]
+                },
+                "allowed_days_in_past": {
+                  "$id": "#/properties/search/properties/validation/properties/date_of_service/properties/allowed_days_in_past",
+                  "type": "integer",
+                  "title": "The allowed_days_in_past schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": 0,
+                  "examples": [365]
+                }
+              },
+              "additionalProperties": true
+            },
+            "member_id": {
+              "$id": "#/properties/search/properties/validation/properties/member_id",
+              "type": "object",
+              "title": "Member ID",
+              "description": "",
+              "default": {},
+              "examples": [
+                {
+                  "min_length": 2,
+                  "max_length": 80,
+                  "format_validation_regex": "^[a-zA-Z0-9]*$",
+                  "format_validation_error": "Member ID can only contain letters and numbers"
+                }
+              ],
+              "required": [
+                "min_length",
+                "max_length",
+                "format_validation_regex",
+                "format_validation_error"
+              ],
+              "properties": {
+                "min_length": {
+                  "$id": "#/properties/search/properties/validation/properties/member_id/properties/min_length",
+                  "type": "integer",
+                  "title": "The min_length schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": 0,
+                  "examples": [2]
+                },
+                "max_length": {
+                  "$id": "#/properties/search/properties/validation/properties/member_id/properties/max_length",
+                  "type": "integer",
+                  "title": "The max_length schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": 0,
+                  "examples": [80]
+                },
+                "format_validation_regex": {
+                  "$id": "#/properties/search/properties/validation/properties/member_id/properties/format_validation_regex",
+                  "type": "string",
+                  "title": "The format_validation_regex schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": "",
+                  "examples": ["^[a-zA-Z0-9]*$"]
+                },
+                "format_validation_error": {
+                  "$id": "#/properties/search/properties/validation/properties/member_id/properties/format_validation_error",
+                  "type": "string",
+                  "title": "The format_validation_error schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": "",
+                  "examples": ["Member ID can only contain letters and numbers"]
+                }
+              },
+              "additionalProperties": true
+            },
+            "last_name": {
+              "$id": "#/properties/search/properties/validation/properties/last_name",
+              "type": "object",
+              "title": "The last_name schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": {},
+              "examples": [
+                {
+                  "min_length": 1,
+                  "max_length": 60
+                }
+              ],
+              "required": ["min_length", "max_length"],
+              "properties": {
+                "min_length": {
+                  "$id": "#/properties/search/properties/validation/properties/last_name/properties/min_length",
+                  "type": "integer",
+                  "title": "The min_length schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": 0,
+                  "examples": [1]
+                },
+                "max_length": {
+                  "$id": "#/properties/search/properties/validation/properties/last_name/properties/max_length",
+                  "type": "integer",
+                  "title": "The max_length schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": 0,
+                  "examples": [60]
+                }
+              },
+              "additionalProperties": true
+            },
+            "first_name": {
+              "$id": "#/properties/search/properties/validation/properties/first_name",
+              "type": "object",
+              "title": "The first_name schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": {},
+              "examples": [
+                {
+                  "min_length": 1,
+                  "max_length": 35,
+                  "is_required": false
+                }
+              ],
+              "required": ["min_length", "max_length", "is_required"],
+              "properties": {
+                "min_length": {
+                  "$id": "#/properties/search/properties/validation/properties/first_name/properties/min_length",
+                  "type": "integer",
+                  "title": "The min_length schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": 0,
+                  "examples": [1]
+                },
+                "max_length": {
+                  "$id": "#/properties/search/properties/validation/properties/first_name/properties/max_length",
+                  "type": "integer",
+                  "title": "The max_length schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": 0,
+                  "examples": [35]
+                },
+                "is_required": {
+                  "$id": "#/properties/search/properties/validation/properties/first_name/properties/is_required",
+                  "type": "boolean",
+                  "title": "The is_required schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": false,
+                  "examples": [false]
+                }
+              },
+              "additionalProperties": true
+            },
+            "date_of_birth": {
+              "$id": "#/properties/search/properties/validation/properties/date_of_birth",
+              "type": "object",
+              "title": "The date_of_birth schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": {},
+              "examples": [{}],
+              "required": [],
+              "additionalProperties": true
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}
